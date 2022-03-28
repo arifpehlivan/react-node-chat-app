@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import {Link, useNavigate} from 'react-router-dom'
 import Logo from '../assets/logo.png'
 import {ToastContainer,toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
-import registerRoute from '../utils/APIRoutes'
+import {registerRoute} from '../utils/APIRoutes'
 
 function Register() {
   const navigate=useNavigate();
@@ -22,6 +22,11 @@ function Register() {
     draggable: true,
     theme: "dark"
   }
+  useEffect(()=>{
+    if(localStorage.getItem("chat-app-user")){
+      navigate('/')
+    }
+  },[])
   const handleSubmit=async (event)=>{
     event.preventDefault();
     if(handleValidation()){
